@@ -368,3 +368,44 @@ body {
 	height: 100%;
 	background: url(../img/loader.gif) center center no-repeat;
 }
+
+/* =========================================
+   MOBILE RESPONSIVENESS FIXES
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Fix the massive text in the About section */
+    .section .container .row .col-md-7 {
+        font-size: 16px; 
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* 2. Scale down the main Title text so it fits on screen */
+    .titleMessage .heading .main {
+        font-size: 35px;
+        letter-spacing: 3px;
+    }
+    .titleMessage .heading .sub {
+        font-size: 16px;
+    }
+
+    /* 3. Bring the Carousel navigation buttons back onto the screen */
+    .owl-carousel .owl-nav button.owl-prev,
+    .owl-carousel .owl-nav button.owl-next,
+    .owl-carousel button.owl-dot {
+        margin-left: 0 !important;
+        margin: 0 15px !important;
+        font-size: 40px !important;
+    }
+
+    /* 4. Add breathing room to your Stats squares when they stack vertically */
+    .squareItem {
+        margin-top: 60px;
+    }
+    
+    /* 5. Ensure Portfolio items are centered */
+    .items .icons {
+        margin: -20px auto 0 -45px;
+    }
+}
