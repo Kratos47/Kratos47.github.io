@@ -409,3 +409,40 @@ body {
         margin: -20px auto 0 -45px;
     }
 }
+
+/* =========================================
+   OWL CAROUSEL FIXES (TOUCH & BUTTONS)
+   ========================================= */
+
+/* Fix the "Dead Zone" scrolling issue on mobile */
+.owl-carousel.owl-drag .owl-item {
+    touch-action: pan-y !important;
+}
+
+/* Center the Next/Prev Navigation Arrows */
+.owl-carousel .owl-nav {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Override the crazy 500px/100px margins and align them properly */
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next {
+    margin: 0 30px !important; 
+    font-size: 50px !important;
+    display: inline-block;
+    outline: none; /* Removes the ugly blue box when clicked */
+}
+
+/* Center the Pagination Dots (if you turn them back on) */
+.owl-carousel .owl-dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Override the 100px margin on the dots */
+.owl-carousel button.owl-dot {
+    margin: 0 8px !important;
+    display: inline-block;
+}
