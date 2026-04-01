@@ -1,180 +1,125 @@
 $(window).on("load", function() {
+    // Assets are loaded, kill the loader
+    $(".loader .inner").fadeOut(500, function() {
+        $(".loader").fadeOut(750);
+    });
 
-	$(".loader .inner").fadeOut(500, function() {
-		$(".loader").fadeOut(750);
-	});
-
-	$(".items").isotope({
-		filter: '*',
-		animationOptions: {
-		duration: 15000, 
-			easing: 'linear', 
-			queue: false
-		}
-	});
-
-})
-
-
-
-
-
-$(document).ready(function() 
-{ 
-	$('#slides').superslides({
-		animation: 'fade',
-		play: 15000,
-		pagination: false
-});
-
-var typed = new Typed(".typed", {
-	strings :["Game Developer" ,
-	"System Programer", 
-	"Optimizing Real-Time Systems",
-	"DX11, OPEN_GL, SIMD",
-	"Software Designer",
-	"Design patterns",
-	"Software Tester",
-	" Unit testing",
-	"Game Engine Programer",
-	"Tools Programer",
-	"C++, C#, Java", 
-	"HLSL, GLSL"],
-	typeSpeed: 70,
-	loop: true,
-	startDelay: 1000,
-	showCursor: false
-}); 
-
-// $('.owl-carousel').owlCarousel({
-// 	    loop:true,
-// 	    items: 4,
-// 	    nav: true,
-// 	    responsive:{
-// 	        0:{
-// 	            items:1
-// 	        },
-// 	        480:{
-// 	            items:2
-// 	        },
-// 	        768:{
-// 	            items:3
-// 	        },
-// 	        938:{
-// 	            items:4
-// 	        }
-// 	    }
-// 	});
-
-$('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
+    // FIX: Animation Latency - Changed from 15000 to 750
+    $(".items").isotope({
+        filter: '*',
+        animationOptions: {
+            duration: 750, 
+            easing: 'linear', 
+            queue: false
         }
-    }
-})
-
-	var skillsTopOffset = $(".skillsSection").offset().top;
-	var statsTopOffset = $(".statsSection").offset().top;
-	var countUpFinished = false;
-	$(window).scroll(function() {
-
-		if(window.pageYOffset > skillsTopOffset - $(window).height() + 200) {
-
-			$('.chart').easyPieChart({
-		        easing: 'easeInOut',
-		        barColor: '#fff',
-		        trackColor: false,
-		        scaleColor: false,
-		        lineWidth: 4,
-		        size: 152,
-		        onStep: function(from, to, percent) {
-		        	$(this.el).find('.percent').text(Math.round(percent));
-		        }
-	    	});
-
-	    	
-		}
-		if(!countUpFinished && window.pageYOffset > statsTopOffset - $(window).height() + 200) {
-			$(".counter").each(function()
-			{
-		var element = $(this);
-		var endVal = parseInt(element.text());
-
-		element.countup(endVal);
-		})
-
-			countUpFinished = true;
-		}
-
-	});
-
-	$("[data-fancybox]").fancybox();
-
-	
-
-	$("#filters a").click(function() {
-
-		$("#filters .current").removeClass("current");
-		$(this).addClass("current");
-
-		var selector = $(this).attr("data-filter");
-
-		$(".items").isotope({
-			filter: selector,
-			animationOptions: {
-				duration: 1500,
-				easing: 'linear',
-				queue: false
-			}
-		});
-
-		return false;
-	});
-
-
-
-	$("#navigation li a").click(function(e) {
-		e.preventDefault();
-
-		var targetElement = $(this).attr("href");
-		var targetPosition = $(targetElement).offset().top;
-		$("html, body").animate({ scrollTop: targetPosition - 50 }, "slow");
-
-	});
-
-
-
-
-	const nav = $("#navigation");
-	const navTop = nav.offset().top;
-
-	$(window).on("scroll", stickyNavigation);
-
-	function stickyNavigation() {
-
-		var body = $("body");
-
-		if($(window).scrollTop() >= navTop) {
-			//body.css("padding-top", nav.outerHeight() + "px");
-			body.addClass("fixedNav");
-		}
-		else {
-			//body.css("padding-top", 0);
-			body.removeClass("fixedNav");
-		}
-
-	}
-	
+    });
 });
 
+$(document).ready(function() { 
+    // FIX: Slider Latency - Changed from 15000 to 8000 (8 seconds per slide)
+    $('#slides').superslides({
+        animation: 'fade',
+        play: 8000,
+        pagination: false
+    });
 
+    var typed = new Typed(".typed", {
+        strings: [
+            "Game Developer", "System Programmer", "C++, C#, Java", "HLSL, GLSL", "Software Designer"
+        ],
+        typeSpeed: 70,
+        loop: true,
+        startDelay: 1000,
+        showCursor: false
+    }); 
+
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: { items: 1 },
+            600: { items: 3 },
+            1000: { items: 5 }
+        }
+    });
+
+    // FIX: Scroll Overload - Cache these values outside the scroll function
+    var $window = $(window);
+    var skillsSection = $(".skillsSection");
+    var statsSection = $(".statsSection");
+    
+    // Only calculate these once to save CPU
+    var skillsTopOffset = skillsSection.length ? skillsSection.offset().top : 0;
+    var statsTopOffset = statsSection.length ? statsSection.offset().top : 0;
+    var winHeight = $window.height();
+    var countUpFinished = false;
+
+    $window.on("scroll", function() {
+        var pageOffset = window.pageYOffset;
+
+        // Trigger Charts
+        if (pageOffset > skillsTopOffset - winHeight + 200) {
+            $('.chart').easyPieChart({
+                easing: 'easeInOut',
+                barColor: '#fff',
+                trackColor: false,
+                scaleColor: false,
+                lineWidth: 4,
+                size: 152,
+                onStep: function(from, to, percent) {
+                    $(this.el).find('.percent').text(Math.round(percent));
+                }
+            });
+        }
+
+        // Trigger Stats Counter
+        if (!countUpFinished && pageOffset > statsTopOffset - winHeight + 200) {
+            $(".counter").each(function() {
+                var element = $(this);
+                var endVal = parseInt(element.text());
+                element.countup(endVal);
+            });
+            countUpFinished = true;
+        }
+    });
+
+    // Portfolio Filter Animation Fix
+    $("#filters a").click(function() {
+        $("#filters .current").removeClass("current");
+        $(this).addClass("current");
+        var selector = $(this).attr("data-filter");
+
+        $(".items").isotope({
+            filter: selector,
+            animationOptions: {
+                duration: 750, // Fixed from 1500
+                easing: 'linear',
+                queue: false
+            }
+        });
+        return false;
+    });
+
+    // Smooth Scroll
+    $("#navigation li a").click(function(e) {
+        e.preventDefault();
+        var targetElement = $(this).attr("href");
+        var targetPosition = $(targetElement).offset().top;
+        $("html, body").animate({ scrollTop: targetPosition - 50 }, "slow");
+    });
+
+    // Sticky Nav Cache
+    const nav = $("#navigation");
+    const navTop = nav.offset().top;
+
+    $window.on("scroll", function() {
+        if ($window.scrollTop() >= navTop) {
+            $("body").addClass("fixedNav");
+        } else {
+            $("body").removeClass("fixedNav");
+        }
+    });
+
+    $("[data-fancybox]").fancybox();
+});
