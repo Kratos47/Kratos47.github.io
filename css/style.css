@@ -502,3 +502,13 @@ body {
     margin: 0 8px !important;
     display: inline-block;
 }
+#arcade-container {
+    width: 100%;
+    height: 100vh; /* Or however tall you want the arcade section to be */
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Arcade cabinet black */
+    overflow: hidden; /* Prevents scrollbars if the screen is tiny */
+}
