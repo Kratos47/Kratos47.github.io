@@ -125,29 +125,24 @@
         <div id="arcade" class="section">
             <div class="container">
                 <div class="row">
-                    <div class="heading col-12 text-center">
+                    <div class="col-12 text-center">
                         <h2>LIVE ARCADE</h2>
                         <p>Playable prototypes hosted independently on GitHub</p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-6 col-md-3">
-                        <div class="game-card" data-game-url="https://kratos47.github.io/SpaceInvaderPhaser/"
+
+                        <div class="game-card" data-game-url="https://kratos47.github.io/Animation/"
                             onclick="loadArcadeGame(this)">
                             <div class="game-thumb">
-                                <img src="img/portfolio/thumbnails/SpaceInvaderThumbnill.PNG" alt="Space Invaders">
-                                <div class="play-overlay"><i class="fas fa-play"></i></div>
+                                <img src="img/portfolio/thumbnails/SpaceInvaderThumbnill.PNG"
+                                    style="width:100%; border:2px solid #e74c3c; border-radius:8px;">
+                                <p class="mt-2">Space Invaders Prototype</p>
                             </div>
-                            <h5 class="text-center mt-2">Space Invaders Prototype</h5>
                         </div>
-                    </div>
-                </div>
-                <div id="game-stage" class="row" style="display:none;">
-                    <div class="col-12 text-center">
-                        <div class="game-container">
+
+                        <div id="game-stage" class="game-container">
                             <button class="close-game" onclick="closeArcadeGame()">Close Game [X]</button>
-                            <iframe id="game-iframe" src="" frameborder="0" allowfullscreen></iframe>
+                            <iframe id="game-iframe" src="" allowfullscreen></iframe>
                         </div>
+
                     </div>
                 </div>
             </div>
