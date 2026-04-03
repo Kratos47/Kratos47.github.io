@@ -11,12 +11,10 @@ body {
     position: absolute;
     z-index: 3;
     background-color: rgba(0, 0, 0, 0.4);
-    /* Allows you to click the video buttons through the dark tint */
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 .slides-navigation {
-    /* Ensures Red Arrows stay on top of everything */
     z-index: 10 !important;
 }
 
@@ -46,7 +44,6 @@ body {
     z-index: 5;
     text-align: center;
     margin-top: -125px;
-    /* Allows you to click the video even if your name is "on top" of it */
     pointer-events: none;
 }
 
@@ -70,14 +67,20 @@ body {
    ========================================= */
 
 #arcade {
-    background-color: #000; /* Matching your dark theme */
+    background-color: #000;
     color: #fff;
     padding: 100px 0;
-    width: 100%;
+    transition: min-height 0.5s ease;
+    /* Smooth transition when game opens */
 }
 
-/* FIX: Ensure the Bootstrap row inside Arcade centers everything vertically */
-#arcade .container .row {
+/* Logic to lock height to screen when game is open */
+#arcade.game-active {
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.arcade-flex-column {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,78 +90,59 @@ body {
 .game-card {
     cursor: pointer;
     margin: 20px auto;
-    max-width: 250px;
+    max-width: 200px;
     text-align: center;
 }
 
-.game-card:hover {
-    transform: translateY(-10px);
-}
-
-.game-thumb {
-    position: relative;
+.game-thumb img {
     border: 3px solid #e74c3c;
     border-radius: 8px;
-    overflow: hidden;
-    background: #000;
-}
-
-.game-thumb img {
-    width: 100%;
-    display: block;
-    opacity: 0.8;
-}
-
-.play-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
-    color: #fff;
-    font-size: 30px;
-    transition: 0.3s;
-}
-
-.game-card:hover .play-overlay {
-    background: rgba(231, 76, 60, 0.7);
+    transition: transform 0.3s ease;
 }
 
 /* Shared Stage Container */
 .game-container {
     position: relative;
     width: 95%;
-    max-width: 800px;
-    margin: 50px auto 0 auto; /* Centering horizontally */
+    max-width: 900px;
+    margin: 20px auto;
     background: #111;
-    border: 2px solid #e74c3c; /* Red accent border */
-    box-shadow: 0 0 20px rgba(231, 76, 60, 0.2);
-    aspect-ratio: 4 / 3; /* Maintaining Arcade Proportions */
-    display: none; /* Controlled by JS fadeIn */
+    border: 2px solid #e74c3c;
+    box-shadow: 0 0 25px rgba(231, 76, 60, 0.5);
+    display: none;
+    flex-direction: column;
 }
 
 #game-iframe {
     width: 100%;
-    height: 100%;
+    height: 70vh;
+    /* Fixed height relative to screen size */
     border: none;
-    display: block;
 }
 
-.close-game {
-    position: absolute;
-    top: -45px;
-    right: 0;
-    background: #e74c3c;
-    color: #fff;
+.stage-controls {
+    display: flex;
+    justify-content: space-between;
+    background: #333;
+    padding: 5px 15px;
+}
+
+.stage-btn {
+    background: none;
     border: none;
-    padding: 8px 15px;
+    color: #fff;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 4px;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.popout-btn:hover {
+    color: #3498db;
+}
+
+.close-btn:hover {
+    color: #e74c3c;
 }
 
 /* =========================================
@@ -460,7 +444,7 @@ body {
 
 @media (max-width: 768px) {
     .section .container .row .col-md-7 {
-        font-size: 16px; 
+        font-size: 16px;
         text-align: center;
         margin-top: 20px;
     }
@@ -469,6 +453,7 @@ body {
         font-size: 35px;
         letter-spacing: 3px;
     }
+
     .titleMessage .heading .sub {
         font-size: 16px;
     }
@@ -484,14 +469,14 @@ body {
     .squareItem {
         margin-top: 60px;
     }
-    
+
     .items .icons {
         margin: -20px auto 0 -45px;
     }
 }
 
 /* =========================================
-   OWL CAROUSEL FIXES (TOUCH & BUTTONS)
+   OWL CAROUSEL FIXES
    ========================================= */
 
 .owl-carousel.owl-drag .owl-item {
@@ -506,7 +491,7 @@ body {
 
 .owl-carousel .owl-nav button.owl-prev,
 .owl-carousel .owl-nav button.owl-next {
-    margin: 0 30px !important; 
+    margin: 0 30px !important;
     font-size: 50px !important;
     display: inline-block;
     outline: none;

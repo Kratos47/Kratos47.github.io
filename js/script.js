@@ -1,151 +1,95 @@
-$(window).on("load", function() {
-    // Assets are loaded, kill the loader
-    $(".loader .inner").fadeOut(500, function() {
-        $(".loader").fadeOut(750);
-    });
-
-    // FIX: Animation Latency - Changed from 15000 to 750
-    $(".items").isotope({
-        filter: '*',
-        animationOptions: {
-            duration: 750, 
-            easing: 'linear', 
-            queue: false
-        }
-    });
+$(window).on("load", function () {
+	$(".loader .inner").fadeOut(500, function () { $(".loader").fadeOut(750); });
+	$(".items").isotope({
+		filter: '*',
+		animationOptions: { duration: 750, easing: 'linear', queue: false }
+	});
 });
 
-$(document).ready(function() { 
-    // FIX: Slider Latency - Changed from 15000 to 8000 (8 seconds per slide)
-    $('#slides').superslides({
-        animation: 'fade',
-        play: 8000,
-        pagination: false
-    });
+$(document).ready(function () {
+	$('#slides').superslides({ animation: 'fade', play: 8000, pagination: false });
 
-    var typed = new Typed(".typed", {
-        strings: [
-            "Game Developer", "System Programmer", "C++, C#, Java", "HLSL, GLSL", "Software Designer"
-        ],
-        typeSpeed: 70,
-        loop: true,
-        startDelay: 1000,
-        showCursor: false
-    }); 
+	var typed = new Typed(".typed", {
+		strings: ["Game Developer", "System Programmer", "C++, C#, Java", "HLSL, GLSL", "Software Designer"],
+		typeSpeed: 70, loop: true, startDelay: 1000, showCursor: false
+	});
 
-    $('.owl-carousel').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: true,
-        responsive: {
-            0: { items: 1 },
-            600: { items: 3 },
-            1000: { items: 5 }
-        }
-    });
+	$('.owl-carousel').owlCarousel({
+		loop: true, margin: 10, nav: true,
+		responsive: { 0: { items: 1 }, 600: { items: 3 }, 1000: { items: 5 } }
+	});
 
-    // FIX: Scroll Overload - Cache these values outside the scroll function
-    var $window = $(window);
-    var skillsSection = $(".skillsSection");
-    var statsSection = $(".statsSection");
-    
-    // Only calculate these once to save CPU
-    var skillsTopOffset = skillsSection.length ? skillsSection.offset().top : 0;
-    var statsTopOffset = statsSection.length ? statsSection.offset().top : 0;
-    var winHeight = $window.height();
-    var countUpFinished = false;
+	var $window = $(window);
+	var skillsSection = $(".skillsSection");
+	var statsSection = $(".statsSection");
+	var skillsTopOffset = skillsSection.length ? skillsSection.offset().top : 0;
+	var statsTopOffset = statsSection.length ? statsSection.offset().top : 0;
+	var winHeight = $window.height();
+	var countUpFinished = false;
 
-    $window.on("scroll", function() {
-        var pageOffset = window.pageYOffset;
+	$window.on("scroll", function () {
+		var pageOffset = window.pageYOffset;
+		if (pageOffset > skillsTopOffset - winHeight + 200) {
+			$('.chart').easyPieChart({
+				easing: 'easeInOut', barColor: '#fff', trackColor: false, scaleColor: false, lineWidth: 4, size: 152,
+				onStep: function (from, to, percent) { $(this.el).find('.percent').text(Math.round(percent)); }
+			});
+		}
+		if (!countUpFinished && pageOffset > statsTopOffset - winHeight + 200) {
+			$(".counter").each(function () { $(this).countup(parseInt($(this).text())); });
+			countUpFinished = true;
+		}
+	});
 
-        // Trigger Charts
-        if (pageOffset > skillsTopOffset - winHeight + 200) {
-            $('.chart').easyPieChart({
-                easing: 'easeInOut',
-                barColor: '#fff',
-                trackColor: false,
-                scaleColor: false,
-                lineWidth: 4,
-                size: 152,
-                onStep: function(from, to, percent) {
-                    $(this.el).find('.percent').text(Math.round(percent));
-                }
-            });
-        }
+	$("#filters a").click(function () {
+		$("#filters .current").removeClass("current");
+		$(this).addClass("current");
+		$(".items").isotope({ filter: $(this).attr("data-filter"), animationOptions: { duration: 750, easing: 'linear', queue: false } });
+		return false;
+	});
 
-        // Trigger Stats Counter
-        if (!countUpFinished && pageOffset > statsTopOffset - winHeight + 200) {
-            $(".counter").each(function() {
-                var element = $(this);
-                var endVal = parseInt(element.text());
-                element.countup(endVal);
-            });
-            countUpFinished = true;
-        }
-    });
+	$("#navigation li a").click(function (e) {
+		e.preventDefault();
+		var targetElement = $(this).attr("href");
+		var targetPosition = $(targetElement).offset().top;
+		$("html, body").animate({ scrollTop: targetPosition - 50 }, "slow");
+	});
 
-    // Portfolio Filter Animation Fix
-    $("#filters a").click(function() {
-        $("#filters .current").removeClass("current");
-        $(this).addClass("current");
-        var selector = $(this).attr("data-filter");
+	const nav = $("#navigation");
+	const navTop = nav.offset().top;
+	$window.on("scroll", function () {
+		if ($window.scrollTop() >= navTop) { $("body").addClass("fixedNav"); }
+		else { $("body").removeClass("fixedNav"); }
+	});
 
-        $(".items").isotope({
-            filter: selector,
-            animationOptions: {
-                duration: 750, // Fixed from 1500
-                easing: 'linear',
-                queue: false
-            }
-        });
-        return false;
-    });
-
-    // Smooth Scroll
-    $("#navigation li a").click(function(e) {
-        e.preventDefault();
-        var targetElement = $(this).attr("href");
-        var targetPosition = $(targetElement).offset().top;
-        $("html, body").animate({ scrollTop: targetPosition - 50 }, "slow");
-    });
-
-    // Sticky Nav Cache
-    const nav = $("#navigation");
-    const navTop = nav.offset().top;
-
-    $window.on("scroll", function() {
-        if ($window.scrollTop() >= navTop) {
-            $("body").addClass("fixedNav");
-        } else {
-            $("body").removeClass("fixedNav");
-        }
-    });
-
-    $("[data-fancybox]").fancybox();
+	$("[data-fancybox]").fancybox();
 });
 
 /* MODULAR ARCADE FUNCTIONS */
-// This allows you to plug in any GitHub repo URL via the data-game-url attribute
 function loadArcadeGame(element) {
-    // 1. Get the URL from the clicked thumbnail
-    var url = $(element).attr("data-game-url");
-    
-    // 2. Plug the URL into the BIG stage iframe
-    $("#game-iframe").attr("src", url);
-    
-    // 3. Show the hidden stage
-    $("#game-stage").fadeIn(500);
+	var url = $(element).attr("data-game-url");
+	$("#game-iframe").attr("src", url);
+	$("#game-stage").css("display", "flex").hide().fadeIn(500); // Forces flex display then fades
+	$("#arcade").addClass("game-active");
 
-    // 4. Scroll the screen so the Game Stage is centered in the window
-    $('html, body').animate({
-        scrollTop: $("#game-stage").offset().top - 100
-    }, 800);
-    
-    // 5. Set focus so keyboard inputs work for Space Invaders immediately
-    $("#game-iframe").focus();
+	// Scroll to the arcade section with a slight offset to center the frame
+	$('html, body').animate({
+		scrollTop: $("#arcade").offset().top - 20
+	}, 800);
+
+	$("#game-iframe").focus();
 }
 
 function closeArcadeGame() {
-    $("#game-stage").fadeOut(300);
-    $("#game-iframe").attr("src", ""); // Kills the game process/audio
+	$("#game-stage").fadeOut(300, function () {
+		$("#arcade").removeClass("game-active");
+	});
+	$("#game-iframe").attr("src", "");
+}
+
+function popoutGame() {
+	var url = $("#game-iframe").attr("src");
+	if (url) {
+		window.open(url, '_blank'); // Opens the current game URL in a separate window
+	}
 }
