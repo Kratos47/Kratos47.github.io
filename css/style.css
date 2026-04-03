@@ -69,17 +69,26 @@ body {
    ARCADE SECTION STYLES
    ========================================= */
 
-   /* Clean Arcade Styling */
 #arcade {
     background-color: #000; /* Matching your dark theme */
     color: #fff;
     padding: 100px 0;
+    width: 100%;
+}
+
+/* FIX: Ensure the Bootstrap row inside Arcade centers everything vertically */
+#arcade .container .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .game-card {
     cursor: pointer;
     margin: 20px auto;
     max-width: 250px;
+    text-align: center;
 }
 
 .game-card:hover {
@@ -119,10 +128,10 @@ body {
     background: rgba(231, 76, 60, 0.7);
 }
 
-/* THE FIX: Shared Stage Container */
+/* Shared Stage Container */
 .game-container {
     position: relative;
-    width: 90%;
+    width: 95%;
     max-width: 800px;
     margin: 50px auto 0 auto; /* Centering horizontally */
     background: #111;
@@ -141,14 +150,15 @@ body {
 
 .close-game {
     position: absolute;
-    top: -40px;
+    top: -45px;
     right: 0;
     background: #e74c3c;
     color: #fff;
     border: none;
-    padding: 5px 15px;
+    padding: 8px 15px;
     font-weight: bold;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 /* =========================================
@@ -510,14 +520,4 @@ body {
 .owl-carousel button.owl-dot {
     margin: 0 8px !important;
     display: inline-block;
-}
-#arcade-container {
-    width: 100%;
-    height: 100vh; /* Or however tall you want the arcade section to be */
-    max-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #000; /* Arcade cabinet black */
-    overflow: hidden; /* Prevents scrollbars if the screen is tiny */
 }

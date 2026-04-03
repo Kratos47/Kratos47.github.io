@@ -127,22 +127,25 @@ $(document).ready(function() {
 /* MODULAR ARCADE FUNCTIONS */
 // This allows you to plug in any GitHub repo URL via the data-game-url attribute
 function loadArcadeGame(element) {
+    // 1. Get the URL from the clicked thumbnail
     var url = $(element).attr("data-game-url");
-    var stage = $("#game-stage");
     
+    // 2. Plug the URL into the BIG stage iframe
     $("#game-iframe").attr("src", url);
-    stage.fadeIn(500);
+    
+    // 3. Show the hidden stage
+    $("#game-stage").fadeIn(500);
 
-    // Scroll directly to the game window
+    // 4. Scroll the screen so the Game Stage is centered in the window
     $('html, body').animate({
-        scrollTop: stage.offset().top - 100
+        scrollTop: $("#game-stage").offset().top - 100
     }, 800);
     
+    // 5. Set focus so keyboard inputs work for Space Invaders immediately
     $("#game-iframe").focus();
 }
 
 function closeArcadeGame() {
     $("#game-stage").fadeOut(300);
-    // Clear the SRC to kill the game process and audio in the background
-    $("#game-iframe").attr("src", ""); 
+    $("#game-iframe").attr("src", ""); // Kills the game process/audio
 }
