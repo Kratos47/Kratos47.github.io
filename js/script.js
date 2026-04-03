@@ -127,21 +127,18 @@ $(document).ready(function() {
 /* MODULAR ARCADE FUNCTIONS */
 // This allows you to plug in any GitHub repo URL via the data-game-url attribute
 function loadArcadeGame(element) {
-    var gameUrl = $(element).attr("data-game-url");
+    var url = $(element).attr("data-game-url");
     var stage = $("#game-stage");
-    var iframe = $("#game-iframe");
     
-    // Load the modular link into the frame
-    iframe.attr("src", gameUrl);
-    
-    // Show the stage and scroll to it smoothly
+    $("#game-iframe").attr("src", url);
     stage.fadeIn(500);
-    $('html, body').animate({
-        scrollTop: $("#arcade").offset().top + 50
-    }, 800);
 
-    // Focus the iframe so keyboard inputs work immediately
-    iframe.focus();
+    // Scroll directly to the game window
+    $('html, body').animate({
+        scrollTop: stage.offset().top - 100
+    }, 800);
+    
+    $("#game-iframe").focus();
 }
 
 function closeArcadeGame() {
