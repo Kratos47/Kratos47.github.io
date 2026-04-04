@@ -1,65 +1,65 @@
 body {
-    font-size: 14px;
-    color: #333;
-    background-color: #fff;
-    letter-spacing: 1px;
+	font-size: 14px;
+	color: #333;
+	background-color: #fff;
+	letter-spacing: 1px;
 }
 
 .overlay {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 3;
-    background-color: rgba(0, 0, 0, 0.4);
-    pointer-events: none;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 3;
+	background-color: rgba(0, 0, 0, 0.4);
+	pointer-events: none;
 }
 
 .slides-navigation {
-    z-index: 10 !important;
+	z-index: 10 !important;
 }
 
 .slides-navigation .prev,
 .slides-navigation .next {
-    width: 47px;
-    height: 47px;
-    background-size: cover;
-    background-repeat: no-repeat;
+	width: 47px;
+	height: 47px;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .slides-navigation a.prev {
-    left: 20px;
-    background-image: url(../img/icons/prev_red.png);
+	left: 20px;
+	background-image: url(../img/icons/prev_red.png);
 }
 
 .slides-navigation a.next {
-    right: 20px;
-    background-image: url(../img/icons/next_red.png);
+	right: 20px;
+	background-image: url(../img/icons/next_red.png);
 }
 
 .titleMessage {
-    position: absolute;
-    width: 100%;
-    height: 250px;
-    top: 20%;
-    z-index: 5;
-    text-align: center;
-    margin-top: -125px;
-    pointer-events: none;
+	position: absolute;
+	width: 100%;
+	height: 250px;
+	top: 20%;
+	z-index: 5;
+	text-align: center;
+	margin-top: -125px;
+	pointer-events: none;
 }
 
 .titleMessage .heading p {
-    color: #f00;
-    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
-    font-weight: 100;
-    letter-spacing: 7px;
+	color: #f00;
+	text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+	font-weight: 100;
+	letter-spacing: 7px;
 }
 
 .titleMessage .heading .main {
-    font-size: 50px;
+	font-size: 50px;
 }
 
 .titleMessage .heading .sub {
-    font-size: 23px;
+	font-size: 23px;
 }
 
 /* =========================================
@@ -67,82 +67,85 @@ body {
    ========================================= */
 
 #arcade {
-    background-color: #000;
-    color: #fff;
-    padding: 100px 0;
-    transition: min-height 0.5s ease;
-    /* Smooth transition when game opens */
+	background-color: #000;
+	color: #fff;
+	padding: 100px 0;
+	transition: min-height 0.5s ease;
 }
 
-/* Logic to lock height to screen when game is open */
 #arcade.game-active {
-    min-height: 100vh;
-    padding: 20px 0;
+	min-height: 100vh;
+	padding: 20px 0;
 }
 
 .arcade-flex-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .game-card {
-    cursor: pointer;
-    margin: 20px auto;
-    max-width: 200px;
-    text-align: center;
+	cursor: pointer;
+	margin: 20px auto;
+	max-width: 200px;
+	text-align: center;
 }
 
 .game-thumb img {
-    border: 3px solid #e74c3c;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+	border: 3px solid #e74c3c;
+	border-radius: 8px;
+	transition: transform 0.3s ease;
 }
 
-/* Shared Stage Container */
 .game-container {
-    position: relative;
-    width: 95%;
-    max-width: 900px;
-    margin: 20px auto;
-    background: #111;
-    border: 2px solid #e74c3c;
-    box-shadow: 0 0 25px rgba(231, 76, 60, 0.5);
-    display: none;
-    flex-direction: column;
+	position: relative;
+	width: 95%;
+	max-width: 600px;
+	margin: 20px auto;
+	background: #111;
+	border: 2px solid #e74c3c;
+	box-shadow: 0 0 25px rgba(231, 76, 60, 0.5);
+	display: none;
+	flex-direction: column;
+	overflow: hidden;
 }
 
 #game-iframe {
-    width: 100%;
-    height: 70vh;
-    /* Fixed height relative to screen size */
-    border: none;
+	width: 100%;
+	height: 80vh;
+	border: none;
+	display: block;
+}
+
+body.stop-scrolling {
+	height: 100%;
+	overflow: hidden;
 }
 
 .stage-controls {
-    display: flex;
-    justify-content: space-between;
-    background: #333;
-    padding: 5px 15px;
+	display: flex;
+	justify-content: space-between;
+	background: #333;
+	padding: 5px 15px;
 }
 
 .stage-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 5px 10px;
+	background: none;
+	border: none;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 14px;
+	padding: 5px 10px;
 }
 
 .popout-btn:hover {
-    color: #3498db;
+	color: #3498db;
 }
 
 .close-btn:hover {
-    color: #e74c3c;
+	color: #e74c3c;
 }
 
 /* =========================================
@@ -150,359 +153,351 @@ body {
    ========================================= */
 
 .section .container .row .col-md-7 {
-    font-size: 23px;
+	font-size: 23px;
 }
 
 .section {
-    padding: 100px 0;
+	padding: 100px 0;
 }
 
 .aboutImage {
-    max-width: 100%;
+	max-width: 100%;
 }
 
 .skillsSection,
 .contactSection {
-    background-color: #e74c3c;
-    color: #fff;
+	background-color: #e74c3c;
+	color: #fff;
 }
 
 .skill {
-    text-align: center;
-    margin-left: 10px;
+	text-align: center;
+	margin-left: 10px;
 }
 
 .chart {
-    position: relative;
-    width: 152px;
-    height: 152px;
-    display: inline-block;
-    text-align: center;
+	position: relative;
+	width: 152px;
+	height: 152px;
+	display: inline-block;
+	text-align: center;
 }
 
 .chart canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 
 .chart .percent {
-    color: #000;
-    line-height: 152px;
-    display: inline-block;
-    font-size: 35px;
+	color: #000;
+	line-height: 152px;
+	display: inline-block;
+	font-size: 35px;
 }
 
 .chart .percent:after {
-    content: '%';
+	content: '%';
 }
 
 .squareItem {
-    margin-top: 30px;
-    position: relative;
+	margin-top: 30px;
+	position: relative;
 }
 
 .squareInnerContainer {
-    position: relative;
-    padding: 50px 15px 35px;
-    text-align: center;
-    border: 2px solid #444;
-    border-top: none;
+	position: relative;
+	padding: 50px 15px 35px;
+	text-align: center;
+	border: 2px solid #444;
+	border-top: none;
 }
 
 .squareInnerContainer:before,
 .squareInnerContainer:after {
-    content: '';
-    position: absolute;
-    top: 0px;
-    width: 30%;
-    border-bottom: 2px solid #444;
+	content: '';
+	position: absolute;
+	top: 0px;
+	width: 30%;
+	border-bottom: 2px solid #444;
 }
 
 .squareInnerContainer:before {
-    right: 0px;
+	right: 0px;
 }
 
 .squareInnerContainer:after {
-    left: 0px;
+	left: 0px;
 }
 
 .squareContent h2 {
-    font-size: 56px;
-    margin-bottom: 10px;
-    font-weight: 400;
-    color: #e74c3c;
+	font-size: 56px;
+	margin-bottom: 10px;
+	font-weight: 400;
+	color: #e74c3c;
 }
 
 .squareContent h3 {
-    font-size: 13px;
-    font-weight: 600;
-    margin: 0;
+	font-size: 13px;
+	font-weight: 600;
+	margin: 0;
 }
 
 .squareIcon {
-    position: absolute;
-    left: 50%;
-    top: -30px;
-    width: 40%;
-    height: 60px;
-    font-size: 45px;
-    margin-left: -20%;
-    color: #444;
+	position: absolute;
+	left: 50%;
+	top: -30px;
+	width: 40%;
+	height: 60px;
+	font-size: 45px;
+	margin-left: -20%;
+	color: #444;
 }
 
 .contactButton {
-    color: #fff;
-    padding: 15px 20px;
-    display: inline-block;
-    margin-top: 20px;
-    border: 1px solid #fff;
-    border-radius: 2px;
+	color: #fff;
+	padding: 15px 20px;
+	display: inline-block;
+	margin-top: 20px;
+	border: 1px solid #fff;
+	border-radius: 2px;
 }
 
 .contactButton:hover {
-    text-decoration: none;
-    color: #e74c3c;
-    background-color: #fff;
+	text-decoration: none;
+	color: #e74c3c;
+	background-color: #fff;
 }
 
 .filter a {
-    color: #bdc3c7;
-    border: 1px solid #bdc3c7;
-    padding: 10px 18px;
-    display: block;
+	color: #bdc3c7;
+	border: 1px solid #bdc3c7;
+	padding: 10px 18px;
+	display: block;
 }
 
 .filter li {
-    display: inline-block;
-    padding: 5px;
+	display: inline-block;
+	padding: 5px;
 }
 
 .filter .current {
-    background-color: #e74c3c;
-    border-color: #e74c3c;
-    color: #fff;
+	background-color: #e74c3c;
+	border-color: #e74c3c;
+	color: #fff;
 }
 
 .filter {
-    text-align: center;
-    width: 100%;
+	text-align: center;
+	width: 100%;
 }
 
 .section .heading {
-    text-align: center;
-    padding-bottom: 40px;
-    width: 100%;
+	text-align: center;
+	padding-bottom: 40px;
+	width: 100%;
 }
 
 .items li {
-    display: inline-block;
-    padding: 5px;
+	display: inline-block;
+	padding: 5px;
 }
 
 .itemsContainer {
-    width: 100%;
+	width: 100%;
 }
 
 .items li img {
-    width: 100%;
-    transition: all 0.2s linear, 1s;
+	width: 100%;
+	transition: all 0.2s linear, 1s;
 }
 
 .items .item {
-    position: relative;
-    display: block;
-    overflow: hidden;
+	position: relative;
+	display: block;
+	overflow: hidden;
 }
 
 .items .icons {
-    position: absolute;
-    width: 90px;
-    height: 40px;
-    left: 50%;
-    top: 50%;
-    margin: -20px auto 0 -47px;
-    text-align: center;
-    z-index: 3;
+	position: absolute;
+	width: 90px;
+	height: 40px;
+	left: 50%;
+	top: 50%;
+	margin: -20px auto 0 -47px;
+	text-align: center;
+	z-index: 3;
 }
 
 .items .icons i {
-    color: #fff;
-    font-size: 20px;
-    margin-top: 9px;
+	color: #fff;
+	font-size: 20px;
+	margin-top: 9px;
 }
 
 .items a {
-    width: 40px;
-    height: 40px;
-    background-color: #e74c3c;
-    position: relative;
-    display: inline-block;
-    transition: all 0.2s linear, 0.2s;
+	width: 40px;
+	height: 40px;
+	background-color: #e74c3c;
+	position: relative;
+	display: inline-block;
+	transition: all 0.2s linear, 0.2s;
 }
 
 .items .imageOverlay {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    opacity: 0;
-    transition: all 0.2s linear, 1s;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	opacity: 0;
+	transition: all 0.2s linear, 1s;
 }
 
 .items .item:hover .imageOverlay {
-    opacity: 1;
+	opacity: 1;
 }
 
 .items .openButton {
-    float: left;
-    left: -200px;
+	float: left;
+	left: -200px;
 }
 
 .items .projectLink {
-    float: right;
-    right: -200px;
+	float: right;
+	right: -200px;
 }
 
 .items .item:hover .openButton {
-    left: 0px;
+	left: 0px;
 }
 
 .items .item:hover .projectLink {
-    right: 0px;
+	right: 0px;
 }
 
 .items .item:hover img {
-    transform: scale(1.05, 1.05);
+	transform: scale(1.05, 1.05);
 }
 
 .items {
-    padding: 0;
+	padding: 0;
 }
 
 .copyrightSection {
-    background-color: #000;
-    color: #fff;
-    padding: 30px 5px;
+	background-color: #000;
+	color: #fff;
+	padding: 30px 5px;
 }
 
 .copyrightSection p {
-    margin: 0;
+	margin: 0;
 }
 
 #navigation {
-    background-color: #e74c3c;
-    padding: 20px 10px;
-    z-index: 100;
-    width: 100%;
+	background-color: #e74c3c;
+	padding: 20px 10px;
+	z-index: 100;
+	width: 100%;
 }
 
 #navigation li {
-    padding: 0 10px;
+	padding: 0 10px;
 }
 
 #navigation li a {
-    color: #fff;
+	color: #fff;
 }
 
 .navbar-brand,
 .navbar-brand:hover {
-    color: #fff;
+	color: #fff;
 }
 
 .navbar-toggler-icon {
-    background: url(../img/icons/menu.png);
-    background-size: 100%;
+	background: url(../img/icons/menu.png);
+	background-size: 100%;
 }
 
 .fixedNav #navigation {
-    position: fixed;
-    top: 0;
+	position: fixed;
+	top: 0;
 }
 
 .loader {
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 1000;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 1000;
 }
 
 .loader .inner {
-    width: 100%;
-    height: 100%;
-    background: url(../img/loader.gif) center center no-repeat;
+	width: 100%;
+	height: 100%;
+	background: url(../img/loader.gif) center center no-repeat;
 }
-
-/* =========================================
-   MOBILE RESPONSIVENESS FIXES
-   ========================================= */
 
 @media (max-width: 768px) {
-    .section .container .row .col-md-7 {
-        font-size: 16px;
-        text-align: center;
-        margin-top: 20px;
-    }
+	.section .container .row .col-md-7 {
+		font-size: 16px;
+		text-align: center;
+		margin-top: 20px;
+	}
 
-    .titleMessage .heading .main {
-        font-size: 35px;
-        letter-spacing: 3px;
-    }
+	.titleMessage .heading .main {
+		font-size: 35px;
+		letter-spacing: 3px;
+	}
 
-    .titleMessage .heading .sub {
-        font-size: 16px;
-    }
+	.titleMessage .heading .sub {
+		font-size: 16px;
+	}
 
-    .owl-carousel .owl-nav button.owl-prev,
-    .owl-carousel .owl-nav button.owl-next,
-    .owl-carousel button.owl-dot {
-        margin-left: 0 !important;
-        margin: 0 15px !important;
-        font-size: 40px !important;
-    }
+	.owl-carousel .owl-nav button.owl-prev,
+	.owl-carousel .owl-nav button.owl-next,
+	.owl-carousel button.owl-dot {
+		margin-left: 0 !important;
+		margin: 0 15px !important;
+		font-size: 40px !important;
+	}
 
-    .squareItem {
-        margin-top: 60px;
-    }
+	.squareItem {
+		margin-top: 60px;
+	}
 
-    .items .icons {
-        margin: -20px auto 0 -45px;
-    }
+	.items .icons {
+		margin: -20px auto 0 -45px;
+	}
 }
 
-/* =========================================
-   OWL CAROUSEL FIXES
-   ========================================= */
-
 .owl-carousel.owl-drag .owl-item {
-    touch-action: pan-y !important;
+	touch-action: pan-y !important;
 }
 
 .owl-carousel .owl-nav {
-    text-align: center;
-    margin-top: 20px;
-    width: 100%;
+	text-align: center;
+	margin-top: 20px;
+	width: 100%;
 }
 
 .owl-carousel .owl-nav button.owl-prev,
 .owl-carousel .owl-nav button.owl-next {
-    margin: 0 30px !important;
-    font-size: 50px !important;
-    display: inline-block;
-    outline: none;
+	margin: 0 30px !important;
+	font-size: 50px !important;
+	display: inline-block;
+	outline: none;
 }
 
 .owl-carousel .owl-dots {
-    text-align: center;
-    margin-top: 10px;
+	text-align: center;
+	margin-top: 10px;
 }
 
 .owl-carousel button.owl-dot {
-    margin: 0 8px !important;
-    display: inline-block;
+	margin: 0 8px !important;
+	display: inline-block;
 }
