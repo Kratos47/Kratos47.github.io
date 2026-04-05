@@ -65,29 +65,30 @@ $(document).ready(function () {
 	$("[data-fancybox]").fancybox();
 });
 
+/* MODULAR ARCADE FUNCTIONS */
 function loadArcadeGame(element) {
-    var url = $(element).attr("data-game-url");
-    $("#game-iframe").attr("src", url);
-    $("#game-stage").css("display", "flex").hide().fadeIn(500);
-    $("#arcade").addClass("game-active");
+	var url = $(element).attr("data-game-url");
+	var $stage = $("#game-stage");
 
-    // REMOVED: $("body").addClass("stop-scrolling");
+	// Set the source and show the container
+	$("#game-iframe").attr("src", url);
+	$stage.fadeIn(500).css("display", "flex");
 
-    // IMPROVED: Scroll so the TOP of the game is near the top of the screen
-    $('html, body').animate({
-        scrollTop: $("#game-stage").offset().top - 80
-    }, 800);
-    
-    $("#game-iframe").focus();
+	// Smooth scroll to the Arcade section heading
+	// Using the #arcade offset is more stable than the dynamic #game-stage offset
+	$('html, body').animate({
+		scrollTop: $("#arcade").offset().top - 60
+	}, 600);
+
+	// Focus the iframe for immediate input
+	$("#game-iframe").focus();
 }
 
 function closeArcadeGame() {
-    $("#game-stage").fadeOut(300, function() {
-        $("#arcade").removeClass("game-active");
-        // REMOVED: $("body").removeClass("stop-scrolling");
-    });
-    $("#game-iframe").attr("src", "");
+	$("#game-stage").fadeOut(300);
+	$("#game-iframe").attr("src", "");
 }
+
 function popoutGame() {
 	var url = $("#game-iframe").attr("src");
 	if (url) {
