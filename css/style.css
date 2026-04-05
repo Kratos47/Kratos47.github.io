@@ -73,7 +73,6 @@ body {
     transition: min-height 0.5s ease;
 }
 
-/* FIX: Ensure the row centers vertically for long vertical games */
 #arcade.game-active {
     min-height: 100vh;
     padding: 20px 0;
@@ -99,31 +98,29 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Shared Stage Container */
+/* THE FIX: Narrower container to match portrait game ratio */
 .game-container {
     position: relative;
     width: 95%;
-    max-width: 600px;
-    /* Reduced for vertical 896x1024 ratio */
+    max-width: 480px; /* Narrowed from 600px to fit 896x1024 ratio better */
     margin: 20px auto;
     background: #111;
     border: 2px solid #e74c3c;
     box-shadow: 0 0 25px rgba(231, 76, 60, 0.5);
     display: none;
     flex-direction: column;
-    overflow: hidden;
-    /* FIX: Prevents container scrollbars */
+    overflow: hidden; 
 }
 
-#game-iframe {
-    width: 100%;
-    height: 80vh;
-    /* FIX: Scales to 80% of screen height to avoid vertical scrolling */
-    border: none;
+/* FIX: Ensure the iframe itself doesn't allow internal scrolling */
+#game-iframe { 
+    width: 100%; 
+    height: 75vh; /* Slightly shorter to ensure controls stay on screen */
+    border: none; 
     display: block;
+    margin: 0 auto;
 }
 
-/* FIX: Used by JS to prevent background scrolling during gameplay */
 body.stop-scrolling {
     height: 100%;
     overflow: hidden;
@@ -133,7 +130,8 @@ body.stop-scrolling {
     display: flex;
     justify-content: space-between;
     background: #333;
-    padding: 8px 15px;
+    padding: 10px 15px;
+    border-bottom: 1px solid #444;
 }
 
 .stage-btn {
@@ -142,17 +140,12 @@ body.stop-scrolling {
     color: #fff;
     font-weight: bold;
     cursor: pointer;
-    font-size: 14px;
-    padding: 5px 10px;
+    font-size: 13px;
+    padding: 5px;
 }
 
-.popout-btn:hover {
-    color: #3498db;
-}
-
-.close-btn:hover {
-    color: #e74c3c;
-}
+.popout-btn:hover { color: #3498db; }
+.close-btn:hover { color: #e74c3c; }
 
 /* =========================================
    CORE LAYOUT STYLES
