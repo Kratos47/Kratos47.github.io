@@ -69,20 +69,26 @@ $(document).ready(function () {
 function loadArcadeGame(element) {
 	var url = $(element).attr("data-game-url");
 	$("#game-iframe").attr("src", url);
-	$("#game-stage").css("display", "flex").hide().fadeIn(500); // Forces flex display then fades
+	$("#game-stage").css("display", "flex").hide().fadeIn(500);
 	$("#arcade").addClass("game-active");
 
-	// Scroll to the arcade section with a slight offset to center the frame
+	// FIX: Add class to body to prevent background scrolling while playing
+	$("body").addClass("stop-scrolling");
+
+	// Scroll to the arcade section
 	$('html, body').animate({
 		scrollTop: $("#arcade").offset().top - 20
 	}, 800);
 
+	// Set focus to the iframe so keyboard inputs work immediately
 	$("#game-iframe").focus();
 }
 
 function closeArcadeGame() {
 	$("#game-stage").fadeOut(300, function () {
 		$("#arcade").removeClass("game-active");
+		// FIX: Remove scroll lock when game is closed
+		$("body").removeClass("stop-scrolling");
 	});
 	$("#game-iframe").attr("src", "");
 }
@@ -90,6 +96,6 @@ function closeArcadeGame() {
 function popoutGame() {
 	var url = $("#game-iframe").attr("src");
 	if (url) {
-		window.open(url, '_blank'); // Opens the current game URL in a separate window
+		window.open(url, '_blank');
 	}
 }
