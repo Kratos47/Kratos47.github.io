@@ -25,16 +25,24 @@ $(document).ready(function () {
 	var skillsTopOffset = skillsSection.length ? skillsSection.offset().top : 0;
 	var statsTopOffset = statsSection.length ? statsSection.offset().top : 0;
 	var winHeight = $window.height();
+
+	// FLAGS: Prevent re-triggering and flickering
 	var countUpFinished = false;
+	var chartsFinished = false;
 
 	$window.on("scroll", function () {
 		var pageOffset = window.pageYOffset;
-		if (pageOffset > skillsTopOffset - winHeight + 200) {
+
+		// Skill Charts Logic with Flag
+		if (!chartsFinished && pageOffset > skillsTopOffset - winHeight + 200) {
 			$('.chart').easyPieChart({
 				easing: 'easeInOut', barColor: '#fff', trackColor: false, scaleColor: false, lineWidth: 4, size: 152,
 				onStep: function (from, to, percent) { $(this.el).find('.percent').text(Math.round(percent)); }
 			});
+			chartsFinished = true;
 		}
+
+		// Stats Counter Logic
 		if (!countUpFinished && pageOffset > statsTopOffset - winHeight + 200) {
 			$(".counter").each(function () { $(this).countup(parseInt($(this).text())); });
 			countUpFinished = true;
@@ -68,19 +76,19 @@ $(document).ready(function () {
 /* MODULAR ARCADE FUNCTIONS */
 function loadArcadeGame(element) {
 	var url = $(element).attr("data-game-url");
-	var $stage = $("#game-stage");
 
-	// Set the source and show the container
+	// Set source first
 	$("#game-iframe").attr("src", url);
-	$stage.fadeIn(500).css("display", "flex");
 
-	// Smooth scroll to the Arcade section heading
-	// Using the #arcade offset is more stable than the dynamic #game-stage offset
-	$('html, body').animate({
-		scrollTop: $("#arcade").offset().top - 60
-	}, 600);
+	// Use a stop() to clear animation queue and prevent stutter
+	$("#game-stage").stop(true, true).fadeIn(400).css("display", "flex");
 
-	// Focus the iframe for immediate input
+	// Scroll to section heading for better stability
+	$('html, body').stop().animate({
+		scrollTop: $("#arcade").offset().top - 20
+	}, 500);
+
+	// Focus the iframe for input
 	$("#game-iframe").focus();
 }
 
