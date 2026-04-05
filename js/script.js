@@ -65,34 +65,29 @@ $(document).ready(function () {
 	$("[data-fancybox]").fancybox();
 });
 
-/* MODULAR ARCADE FUNCTIONS */
 function loadArcadeGame(element) {
-	var url = $(element).attr("data-game-url");
-	$("#game-iframe").attr("src", url);
-	$("#game-stage").css("display", "flex").hide().fadeIn(500);
-	$("#arcade").addClass("game-active");
+    var url = $(element).attr("data-game-url");
+    $("#game-iframe").attr("src", url);
+    $("#game-stage").css("display", "flex").hide().fadeIn(500);
+    $("#arcade").addClass("game-active");
 
-	// FIX: Add class to body to prevent background scrolling while playing
-	$("body").addClass("stop-scrolling");
+    // REMOVED: $("body").addClass("stop-scrolling");
 
-	// Scroll to the arcade section
-	$('html, body').animate({
-		scrollTop: $("#arcade").offset().top - 20
-	}, 800);
-
-	// Set focus to the iframe so keyboard inputs work immediately
-	$("#game-iframe").focus();
+    // IMPROVED: Scroll so the TOP of the game is near the top of the screen
+    $('html, body').animate({
+        scrollTop: $("#game-stage").offset().top - 80
+    }, 800);
+    
+    $("#game-iframe").focus();
 }
 
 function closeArcadeGame() {
-	$("#game-stage").fadeOut(300, function () {
-		$("#arcade").removeClass("game-active");
-		// FIX: Remove scroll lock when game is closed
-		$("body").removeClass("stop-scrolling");
-	});
-	$("#game-iframe").attr("src", "");
+    $("#game-stage").fadeOut(300, function() {
+        $("#arcade").removeClass("game-active");
+        // REMOVED: $("body").removeClass("stop-scrolling");
+    });
+    $("#game-iframe").attr("src", "");
 }
-
 function popoutGame() {
 	var url = $("#game-iframe").attr("src");
 	if (url) {

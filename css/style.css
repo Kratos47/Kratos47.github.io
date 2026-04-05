@@ -121,11 +121,6 @@ body {
     margin: 0 auto;
 }
 
-body.stop-scrolling {
-    height: 100%;
-    overflow: hidden;
-}
-
 .stage-controls {
     display: flex;
     justify-content: space-between;
