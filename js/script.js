@@ -75,28 +75,26 @@ $(document).ready(function () {
 
 /* MODULAR ARCADE FUNCTIONS */
 function loadArcadeGame(element) {
-	var url = $(element).attr("data-game-url");
+    var url = $(element).attr("data-game-url");
+    var $stage = $("#game-stage");
+    
+    $("#game-iframe").attr("src", url);
+    
+    // Use stop(true, true) to prevent animation queue buildup
+    $stage.stop(true, true).fadeIn(300).css("display", "flex");
 
-	// Set source first
-	$("#game-iframe").attr("src", url);
+    // Scroll to the arcade section with a very fast, stable transition
+    $('html, body').stop().animate({
+        scrollTop: $("#arcade").offset().top - 20
+    }, 400);
 
-	// Use a stop() to clear animation queue and prevent stutter
-	$("#game-stage").stop(true, true).fadeIn(400).css("display", "flex");
-
-	// Scroll to section heading for better stability
-	$('html, body').stop().animate({
-		scrollTop: $("#arcade").offset().top - 20
-	}, 500);
-
-	// Focus the iframe for input
-	$("#game-iframe").focus();
+    $("#game-iframe").focus();
 }
 
 function closeArcadeGame() {
-	$("#game-stage").fadeOut(300);
-	$("#game-iframe").attr("src", "");
+    $("#game-stage").stop(true, true).fadeOut(200);
+    $("#game-iframe").attr("src", "");
 }
-
 function popoutGame() {
 	var url = $("#game-iframe").attr("src");
 	if (url) {
