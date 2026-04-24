@@ -104,33 +104,58 @@
     </div>
 
     <div id="arcade" class="section">
-        <div class="container">
-            <div class="row arcade-flex-column">
-                <div class="col-12 text-center">
-                    <h2>LIVE ARCADE</h2>
-                    <p>Playable prototypes hosted independently on GitHub</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>LIVE ARCADE</h2>
+                <p>Playable prototypes hosted independently on GitHub</p>
 
+                <div class="arcade-grid">
+                    
                     <div class="game-card" data-game-url="https://kratos47.github.io/SpaceInvaderPhaser/"
                         onclick="loadArcadeGame(this)">
                         <div class="game-thumb">
                             <img src="img/portfolio/thumbnails/SpaceInvaderThumbnill.PNG"
                                 alt="Space Invaders Prototype">
-                            <p class="mt-2">Space Invaders Prototype</p>
                         </div>
+                        <p class="mt-2">Space Invaders Prototype</p>
                     </div>
 
-                    <div id="game-stage" class="game-container">
-                        <div class="stage-controls">
-                            <button class="stage-btn popout-btn" onclick="popoutGame()">Launch Standalone <i
-                                    class="fas fa-external-link-alt"></i></button>
-                            <button class="stage-btn close-btn" onclick="closeArcadeGame()">Close Game [X]</button>
+                    <div class="game-card" data-game-url="#" onclick="loadArcadeGame(this)">
+                        <div class="game-thumb">
+                            <img src="img/portfolio/thumbnails/dog-square.jpeg" alt="Placeholder 2">
                         </div>
-                        <iframe id="game-iframe" src="" allowfullscreen></iframe>
+                        <p class="mt-2">Coming Soon</p>
                     </div>
+
+                    <div class="game-card" data-game-url="#" onclick="loadArcadeGame(this)">
+                        <div class="game-thumb">
+                            <img src="img/portfolio/thumbnails/dog-square.jpeg" alt="Placeholder 3">
+                        </div>
+                        <p class="mt-2">Coming Soon</p>
+                    </div>
+
+                    <div class="game-card" data-game-url="#" onclick="loadArcadeGame(this)">
+                        <div class="game-thumb">
+                            <img src="img/portfolio/thumbnails/dog-square.jpeg" alt="Placeholder 4">
+                        </div>
+                        <p class="mt-2">Coming Soon</p>
+                    </div>
+
+                </div>
+
+                <div id="game-stage" class="game-container">
+                    <div class="stage-controls">
+                        <button class="stage-btn popout-btn" onclick="popoutGame()">Launch Standalone <i
+                                class="fas fa-external-link-alt"></i></button>
+                        <button class="stage-btn close-btn" onclick="closeArcadeGame()">Close Game [X]</button>
+                    </div>
+                    <iframe id="game-iframe" src="" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <div id="skills" class="skillsSection section">
         <div class="container">

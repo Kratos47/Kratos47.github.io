@@ -63,57 +63,94 @@ body {
 }
 
 /* =========================================
-   ARCADE SECTION STYLES (STABILIZED)
+   LIVE ARCADE SECTION STYLES & GRID
    ========================================= */
 
 #arcade {
     background-color: #000;
     color: #fff;
     padding: 100px 0;
-    /* FIX: Prevents the section from jittering during scroll */
     contain: layout;
+    text-align: center;
 }
 
-.arcade-flex-column {
+#arcade .heading h2 {
+    letter-spacing: 2px;
+}
+
+.arcade-grid {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 40px; 
+    margin: 40px auto 0 auto;
+    max-width: 1000px; 
 }
 
 .game-card {
     cursor: pointer;
-    margin: 20px auto;
-    max-width: 200px;
-    text-align: center;
+    width: 100%;
+    max-width: 220px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.game-card:hover {
+    transform: translateY(-5px); 
+}
+
+.game-thumb {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    background-color: #111; 
+    border: 3px solid #e74c3c;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.1);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.game-card:hover .game-thumb {
+    box-shadow: 0 6px 25px rgba(231, 76, 60, 0.5); 
+    border-color: #ff5e4d;
 }
 
 .game-thumb img {
-    border: 3px solid #e74c3c;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.game-card p {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
 }
 
 .game-container {
     position: relative;
     width: 95%;
-    max-width: 450px; 
+    max-width: 800px; 
+    max-height: 85vh; 
     margin: 30px auto;
     background: #000;
-    
-    /* THE FIX: Solid border without shadow prevents 'ghosting' lines */
     border: 2px solid #e74c3c;
     box-shadow: none; 
-
     display: none;
     flex-direction: column;
     overflow: hidden; 
     aspect-ratio: 896 / 1024; 
-
-    /* THE HARDWARE ACCELERATION FIX: */
-    will-change: transform; /* Moves the box to the GPU */
-    contain: paint;         /* Prevents red pixels from bleeding outside the box */
-    backface-visibility: hidden; /* Stops flicker on high-refresh monitors */
+    will-change: transform; 
+    contain: paint;         
+    backface-visibility: hidden; 
 }
 
 #game-iframe {
@@ -121,7 +158,6 @@ body {
     height: 100%; 
     border: none;
     display: block;
-    /* Prevents the iframe from catching the mouse scroll event */
     pointer-events: auto; 
 }
 
@@ -131,6 +167,7 @@ body {
     background: #222;
     padding: 10px 15px;
     border-bottom: 2px solid #e74c3c;
+    flex-shrink: 0;
 }
 
 .stage-btn {
@@ -301,17 +338,31 @@ body {
     width: 100%;
 }
 
-.items li {
-    display: inline-block;
-    padding: 5px;
-}
+/* =========================================
+   PORTFOLIO GALLERY GRID (ISOTOPE FIX)
+   ========================================= */
 
 .itemsContainer {
     width: 100%;
 }
 
+.items {
+    padding: 0;
+    list-style: none; 
+    width: 100%;
+}
+
+.items li {
+    display: inline-block;
+    padding: 5px;
+    width: 33.3333%; 
+    float: left; 
+}
+
 .items li img {
     width: 100%;
+    height: auto; 
+    display: block;
     transition: all 0.2s linear, 1s;
 }
 
@@ -384,10 +435,6 @@ body {
     transform: scale(1.05, 1.05);
 }
 
-.items {
-    padding: 0;
-}
-
 .copyrightSection {
     background-color: #000;
     color: #fff;
@@ -448,6 +495,13 @@ body {
    MOBILE RESPONSIVENESS FIXES
    ========================================= */
 
+@media (max-width: 992px) {
+    /* Tablet: 2 columns for Portfolio */
+    .items li {
+        width: 50%; 
+    }
+}
+
 @media (max-width: 768px) {
     .section .container .row .col-md-7 {
         font-size: 16px;
@@ -478,6 +532,13 @@ body {
 
     .items .icons {
         margin: -20px auto 0 -45px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Mobile phones: 1 column for Portfolio */
+    .items li {
+        width: 100%; 
     }
 }
 
